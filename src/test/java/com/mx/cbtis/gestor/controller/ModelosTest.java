@@ -105,5 +105,29 @@ class ModelosTest {
 
         a.setFecha_asignacion("2026-10-15");
         assertEquals("2026-10-15", a.getFecha_asignacion());
+
+        Asignaciones aVacio = new Asignaciones();
+        aVacio.setId_asignacion(10);
+        aVacio.setId_usuario(20);
+        aVacio.setId_tarea(30);
+        assertEquals(Integer.valueOf(10), aVacio.getId_asignacion());
+        assertEquals(Integer.valueOf(20), aVacio.getId_usuario());
+        assertEquals(Integer.valueOf(30), aVacio.getId_tarea());
+    }
+
+    @Test
+    @DisplayName("UT-52: Constructores con parámetros de Proyectos, Tareas y Comentarios")
+    void constructoresCompletos() {
+        Proyectos p = new Proyectos(1, "P1", "Desc", "2026-01-01", "2026-02-01", "Activo", "fondo.png");
+        assertEquals(Integer.valueOf(1), p.getId_proyecto());
+        assertEquals("P1", p.getNombre());
+
+        Tareas t = new Tareas(2, "T1", "DescT", "2026-03-01", "pendiente", "warning", 1);
+        assertEquals(Integer.valueOf(2), t.getId_tarea());
+        assertEquals("T1", t.getNombre());
+
+        Comentarios c = new Comentarios(3, "user1", 2, "comentario", "2026-01-01 10:00:00");
+        assertEquals(Integer.valueOf(3), c.getId_comentario());
+        assertEquals("user1", c.getId_usuario());
     }
 }
