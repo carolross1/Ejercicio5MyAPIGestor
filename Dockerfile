@@ -12,9 +12,9 @@ VOLUME /tmp
 COPY --from=builder /app/target/*.jar app.jar
 
 ENV PORT=8081
-ENV SPRING_DATASOURCE_URL=jdbc:mariadb://localhost:3306/dbgestor
-ENV SPRING_DATASOURCE_USERNAME=gestor
-ENV SPRING_DATASOURCE_PASSWORD=gestor123
+ENV SPRING_DATASOURCE_URL=jdbc:h2:mem:dbgestor;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+ENV SPRING_DATASOURCE_USERNAME=sa
+ENV SPRING_DATASOURCE_PASSWORD=
 
 EXPOSE 8081
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]

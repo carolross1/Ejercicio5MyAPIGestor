@@ -11,8 +11,8 @@ services:
       - key: PORT
         value: "8081"
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:mariadb://localhost:3306/dbgestor
+        value: jdbc:h2:mem:dbgestor;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
       - key: SPRING_DATASOURCE_USERNAME
-        value: gestor
+        value: sa
       - key: SPRING_DATASOURCE_PASSWORD
-        value: gestor123
+        value: ""
