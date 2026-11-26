@@ -1,0 +1,97 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "id": 1,
+      "title": "Salud y Disponibilidad de Microservicios Java 21",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "gridPos": { "h": 6, "w": 8, "x": 0, "y": 1 },
+      "id": 2,
+      "title": "Disponibilidad Backend (UP)",
+      "type": "stat",
+      "targets": [
+        { "expr": "up{job='render-cloud-backend'}", "legendFormat": "Backend Render Cloud" }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "options": { "0": { "color": "red", "text": "DOWN" }, "1": { "color": "green", "text": "UP" } }, "type": "value" }
+          ]
+        }
+      }
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "gridPos": { "h": 6, "w": 8, "x": 8, "y": 1 },
+      "id": 3,
+      "title": "Disponibilidad Frontend (UP)",
+      "type": "stat",
+      "targets": [
+        { "expr": "up{job='render-cloud-frontend'}", "legendFormat": "Frontend Render Cloud" }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "options": { "0": { "color": "red", "text": "DOWN" }, "1": { "color": "green", "text": "UP" } }, "type": "value" }
+          ]
+        }
+      }
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "gridPos": { "h": 6, "w": 8, "x": 16, "y": 1 },
+      "id": 4,
+      "title": "Throughput Total (Req/seg)",
+      "type": "stat",
+      "targets": [
+        { "expr": "sum(rate(http_server_requests_seconds_count[1m]))", "legendFormat": "Peticiones/s" }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 7 },
+      "id": 5,
+      "title": "Rendimiento y Latencia (SLA p95)",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "id": 6,
+      "title": "Latencia HTTP Percentil 95 (Segundos)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket[1m])) by (le))", "legendFormat": "p95 Latencia" }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "id": 7,
+      "title": "Consumo de Memoria Heap JVM (Bytes)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "jvm_memory_used_bytes{area='heap'}", "legendFormat": "Heap Utilizado" },
+        { "expr": "jvm_memory_max_bytes{area='heap'}", "legendFormat": "Heap Máximo" }
+      ]
+    }
+  ],
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["devops", "java21", "render", "prometheus", "grafana"],
+  "time": { "from": "now-15m", "to": "now" },
+  "title": "DevOps Observability & Metrics - Java 21 Cloud",
+  "uid": "devops-java21-observability",
+  "version": 1
+}

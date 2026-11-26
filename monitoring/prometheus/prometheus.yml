@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 12s
+  evaluation_interval: 15s
+
+rule_files:
+  - /etc/prometheus/alert_rules.yml
+
+scrape_configs:
+  - job_name: 'render-cloud-backend'
+    metrics_path: '/actuator/prometheus'
+    scheme: https
+    static_configs:
+      - targets: ['api-gestor-backend-1pfv.onrender.com:443']
+
+  - job_name: 'render-cloud-frontend'
+    metrics_path: '/actuator/prometheus'
+    scheme: https
+    static_configs:
+      - targets: ['ejercicio5cliente-s64e.onrender.com:443']
